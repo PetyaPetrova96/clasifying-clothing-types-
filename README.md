@@ -13,7 +13,7 @@ This project, part of the Machine Learning course in the BSc Data Science progra
 - Interpret the first few principal components in terms of image transformation.
 
 ### Classification
-- Implement a Naive Bayes classifier based on non-parametric estimates using the first two linear discriminant variables.
+- Implement a Naive Bayes classifier from scratch.
 - Explore at least two additional classification methods of choice.
 - Consider applying feature scaling to pixel values.
 
