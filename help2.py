@@ -72,25 +72,60 @@ P_shirt = count_4_shirt / num_rows
 
 #%%
 #get list of
-t_shirt_list = []
-trouser_list = []
-pull_over_list = []
-dress_list = []
-shirt_list = []
-
 
 #create a tshirt mask and get the tshirt list
 tshirt_mask = train_data[:, -1] == 0
-#apply the mask to the data and remove the last column
-this_tshirt_list = train_data[tshirt_mask][:, :-1]
+trouser_mask = train_data[:, -1] == 1
+pull_over_mask = train_data[:, -1] == 2
+dress_mask = train_data[:, -1] == 3
+shirt_mask = train_data[:, -1] == 4
 
-tshirt_list = train_data[tshirt_mask]
-print(tshirt_list.shape)
+#apply the mask to the data and remove the last column
+tshirt_list = train_data[tshirt_mask][:, :-1]
+trouser_list = train_data[trouser_mask][:, :-1]
+pull_over_list = train_data[pull_over_mask][:, :-1]
+dress_list = train_data[dress_mask][:, :-1]
+shirt_list = train_data[shirt_mask][:, :-1]
+
+mu0_tshirts = np.mean(tshirt_list)
+mu1_trousers = np.mean(trouser_list)
+mu2_pull_over = np.mean(pull_over_list)
+mu3_dress = np.mean(dress_list)
+mu4_shirt = np.mean(shirt_list)
+
+
+#reshaped = tshirt_list[0].reshape(28,28)
+#print(reshaped-mu0_tshirts)
+#s0 = (reshaped-mu0_tshirts)*np.transpose(reshaped-mu0_tshirts)
+#print(s0)
+#calculate the S0 from the tshirt list and add the reshaped matrixes to a new matrix
+S0 = np.zeros((28,28))
+for item in tshirt_list:
+    reshaped = item.reshape(28,28)
+    S0 += (reshaped-mu0_tshirts)*np.transpose(reshaped-mu0_tshirts)
+print(S0)
+
+
+
+
+
+
+
+
+
+#for item in tshirt_list:
+ #   i = 0
+  #  reshaped = tshirt_list[i].reshape(28,28)
+   # S0 = S0 + (reshaped-mu0_tshirts)*np.transpose(reshaped-mu0_tshirts)
+
+
+#tshirt_list = train_data[tshirt_mask]
+#print(tshirt_list.shape)
 #print(tshirt_list)
-reshaped = this_tshirt_list[0].reshape(28,28)
-print(reshaped)
-plt.imshow(reshaped, cmap='gray')
-plt.show()
+#reshaped = tshirt_list[0].reshape(28,28)
+#print(reshaped)
+#plt.imshow(reshaped, cmap='gray')
+#plt.show()
 #we'll continue calculating the SW from the 28x28 matrixes, and make another list of the reshaped matrixes
 
 
